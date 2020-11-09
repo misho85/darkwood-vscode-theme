@@ -1,21 +1,21 @@
 {
-    "name": "misho-vs-code-theme",
-    "displayName": "misho-vs-code-theme",
-    "description": "",
-    "version": "0.0.1",
-    "engines": {
-        "vscode": "^1.51.0"
-    },
-    "categories": [
-        "Themes"
-    ],
-    "contributes": {
-        "themes": [
-            {
-                "label": "misho-theme",
-                "uiTheme": "vs-dark",
-                "path": "./themes/misho-theme-color-theme.json"
-            }
-        ]
-    }
+  "name": "darkwood-vscode-theme",
+  "displayName": "darkwood-vscode-theme",
+  "description": "",
+  "version": "0.0.1",
+  "engines": {
+    "vscode": "^1.51.0"
+  },
+  "categories": [
+    "Themes"
+  ],
+  "contributes": {
+    "themes": [
+      {
+        "label": "DarkWood",
+        "uiTheme": "vs-dark",
+        "path": "./themes/darkwood-color-theme.json"
+      }
+    ]
+  }
 }
