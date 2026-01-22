@@ -1,0 +1,35 @@
+{
+  "name": "darkwood-theme-sample",
+  "version": "1.0.0",
+  "description": "Sample JSON for theme testing",
+  "author": {
+    "name": "Developer",
+    "email": "dev@example.com",
+    "url": "https://example.com"
+  },
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/example/repo"
+  },
+  "config": {
+    "port": 3000,
+    "debug": true,
+    "maxConnections": 100,
+    "timeout": null,
+    "features": ["auth", "api", "websocket"],
+    "database": {
+      "host": "localhost",
+      "port": 5432,
+      "ssl": false
+    }
+  },
+  "scripts": {
+    "start": "node server.js",
+    "build": "webpack --mode production",
+    "test": "jest --coverage"
+  },
+  "dependencies": {
+    "express": "^4.18.0",
+    "lodash": "^4.17.21"
+  }
+}

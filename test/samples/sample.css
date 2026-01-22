@@ -1,0 +1,135 @@
+/* CSS Sample */
+@import url('https://fonts.googleapis.com/css2?family=Inter:wght@400;600&display=swap');
+
+:root {
+  --color-primary: #fc618d;
+  --color-secondary: #5ad4e6;
+  --color-accent: #fce566;
+  --color-success: #7bd88f;
+  --color-warning: #fd9353;
+  --color-background: #222222;
+  --color-surface: #363537;
+  --color-text: #f7f1ff;
+  --spacing-unit: 8px;
+  --border-radius: 4px;
+}
+
+*,
+*::before,
+*::after {
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+}
+
+body {
+  font-family: 'Inter', -apple-system, BlinkMacSystemFont, sans-serif;
+  font-size: 16px;
+  line-height: 1.6;
+  color: var(--color-text);
+  background-color: var(--color-background);
+}
+
+/* Component: Button */
+.btn {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  padding: calc(var(--spacing-unit) * 1.5) calc(var(--spacing-unit) * 3);
+  font-weight: 600;
+  text-decoration: none;
+  border: none;
+  border-radius: var(--border-radius);
+  cursor: pointer;
+  transition: all 0.2s ease-in-out;
+}
+
+.btn--primary {
+  background-color: var(--color-primary);
+  color: white;
+}
+
+.btn--primary:hover {
+  filter: brightness(1.1);
+  transform: translateY(-1px);
+}
+
+.btn--outline {
+  background-color: transparent;
+  border: 2px solid var(--color-primary);
+  color: var(--color-primary);
+}
+
+/* Component: Card */
+.card {
+  background: var(--color-surface);
+  border-radius: calc(var(--border-radius) * 2);
+  padding: calc(var(--spacing-unit) * 3);
+  box-shadow: 0 4px 6px rgba(0, 0, 0, 0.3);
+}
+
+.card__title {
+  font-size: 1.5rem;
+  margin-bottom: var(--spacing-unit);
+  color: var(--color-accent);
+}
+
+.card__content {
+  color: rgba(247, 241, 255, 0.8);
+}
+
+/* Utility classes */
+.flex { display: flex; }
+.grid { display: grid; }
+.hidden { display: none !important; }
+
+.text-center { text-align: center; }
+.text-primary { color: var(--color-primary); }
+.text-secondary { color: var(--color-secondary); }
+
+/* Animations */
+@keyframes fadeIn {
+  from {
+    opacity: 0;
+    transform: translateY(10px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+.animate-fade-in {
+  animation: fadeIn 0.3s ease-out forwards;
+}
+
+/* Media queries */
+@media screen and (min-width: 768px) {
+  .container {
+    max-width: 720px;
+  }
+}
+
+@media screen and (min-width: 1024px) {
+  .container {
+    max-width: 960px;
+  }
+}
+
+@media (prefers-color-scheme: dark) {
+  /* Already dark theme */
+}
+
+/* Pseudo-elements and selectors */
+.list > li:nth-child(odd) {
+  background: rgba(255, 255, 255, 0.05);
+}
+
+.input:focus-visible {
+  outline: 2px solid var(--color-secondary);
+  outline-offset: 2px;
+}
+
+.link:not(.btn):hover {
+  text-decoration: underline;
+}

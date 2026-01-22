@@ -1,0 +1,487 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>DarkWood Theme - Screenshot Gallery</title>
+  <style>
+    :root {
+      --bg-primary: #222222;
+      --bg-secondary: #191919;
+      --bg-surface: #363537;
+      --text-primary: #f7f1ff;
+      --text-secondary: #8b888f;
+      --accent: #fce566;
+      --pink: #fc618d;
+      --green: #7bd88f;
+      --cyan: #5ad4e6;
+    }
+
+    * {
+      box-sizing: border-box;
+      margin: 0;
+      padding: 0;
+    }
+
+    body {
+      font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+      background: var(--bg-primary);
+      color: var(--text-primary);
+      min-height: 100vh;
+      padding: 40px 20px;
+    }
+
+    .container {
+      max-width: 1400px;
+      margin: 0 auto;
+    }
+
+    header {
+      text-align: center;
+      margin-bottom: 40px;
+    }
+
+    h1 {
+      font-size: 2.5rem;
+      margin-bottom: 10px;
+      background: linear-gradient(135deg, var(--accent), var(--pink));
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
+      background-clip: text;
+    }
+
+    .subtitle {
+      color: var(--text-secondary);
+      font-size: 1.1rem;
+    }
+
+    .controls {
+      display: flex;
+      justify-content: center;
+      gap: 10px;
+      margin-bottom: 30px;
+      flex-wrap: wrap;
+    }
+
+    .btn {
+      padding: 10px 20px;
+      border: none;
+      border-radius: 6px;
+      cursor: pointer;
+      font-size: 14px;
+      font-weight: 500;
+      transition: all 0.2s;
+    }
+
+    .btn-primary {
+      background: var(--accent);
+      color: var(--bg-primary);
+    }
+
+    .btn-primary:hover {
+      filter: brightness(1.1);
+    }
+
+    .btn-secondary {
+      background: var(--bg-surface);
+      color: var(--text-primary);
+    }
+
+    .btn-secondary:hover {
+      background: #454346;
+    }
+
+    .stats {
+      display: flex;
+      justify-content: center;
+      gap: 30px;
+      margin-bottom: 40px;
+    }
+
+    .stat {
+      text-align: center;
+      padding: 20px;
+      background: var(--bg-secondary);
+      border-radius: 10px;
+      min-width: 120px;
+    }
+
+    .stat-value {
+      font-size: 2rem;
+      font-weight: bold;
+      color: var(--accent);
+    }
+
+    .stat-label {
+      color: var(--text-secondary);
+      font-size: 0.9rem;
+      margin-top: 5px;
+    }
+
+    .gallery {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(400px, 1fr));
+      gap: 20px;
+    }
+
+    .screenshot-card {
+      background: var(--bg-secondary);
+      border-radius: 12px;
+      overflow: hidden;
+      transition: transform 0.2s, box-shadow 0.2s;
+    }
+
+    .screenshot-card:hover {
+      transform: translateY(-4px);
+      box-shadow: 0 10px 40px rgba(0, 0, 0, 0.4);
+    }
+
+    .screenshot-img {
+      width: 100%;
+      height: auto;
+      display: block;
+      cursor: pointer;
+    }
+
+    .screenshot-info {
+      padding: 15px 20px;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+    }
+
+    .screenshot-name {
+      font-weight: 600;
+      color: var(--text-primary);
+    }
+
+    .screenshot-lang {
+      padding: 4px 10px;
+      border-radius: 20px;
+      font-size: 12px;
+      font-weight: 500;
+    }
+
+    .lang-js { background: var(--accent); color: var(--bg-primary); }
+    .lang-py { background: var(--cyan); color: var(--bg-primary); }
+    .lang-rs { background: var(--pink); color: white; }
+    .lang-json { background: var(--green); color: var(--bg-primary); }
+    .lang-html { background: #fd9353; color: var(--bg-primary); }
+    .lang-css { background: #948ae3; color: white; }
+
+    .empty-state {
+      text-align: center;
+      padding: 80px 20px;
+      color: var(--text-secondary);
+    }
+
+    .empty-state h2 {
+      margin-bottom: 15px;
+      color: var(--text-primary);
+    }
+
+    .empty-state code {
+      display: inline-block;
+      background: var(--bg-surface);
+      padding: 10px 20px;
+      border-radius: 6px;
+      margin-top: 15px;
+      font-family: 'SF Mono', Monaco, monospace;
+    }
+
+    /* Lightbox */
+    .lightbox {
+      display: none;
+      position: fixed;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      background: rgba(0, 0, 0, 0.95);
+      z-index: 1000;
+      justify-content: center;
+      align-items: center;
+      padding: 20px;
+    }
+
+    .lightbox.active {
+      display: flex;
+    }
+
+    .lightbox img {
+      max-width: 95%;
+      max-height: 95%;
+      object-fit: contain;
+      border-radius: 8px;
+    }
+
+    .lightbox-close {
+      position: absolute;
+      top: 20px;
+      right: 30px;
+      font-size: 40px;
+      color: white;
+      cursor: pointer;
+      opacity: 0.7;
+      transition: opacity 0.2s;
+    }
+
+    .lightbox-close:hover {
+      opacity: 1;
+    }
+
+    .lightbox-nav {
+      position: absolute;
+      top: 50%;
+      transform: translateY(-50%);
+      font-size: 60px;
+      color: white;
+      cursor: pointer;
+      opacity: 0.7;
+      transition: opacity 0.2s;
+      user-select: none;
+    }
+
+    .lightbox-nav:hover {
+      opacity: 1;
+    }
+
+    .lightbox-prev { left: 30px; }
+    .lightbox-next { right: 30px; }
+
+    .drop-zone {
+      border: 3px dashed var(--bg-surface);
+      border-radius: 12px;
+      padding: 60px 20px;
+      text-align: center;
+      margin-bottom: 30px;
+      transition: all 0.2s;
+    }
+
+    .drop-zone.dragover {
+      border-color: var(--accent);
+      background: rgba(252, 229, 102, 0.1);
+    }
+
+    .drop-zone p {
+      color: var(--text-secondary);
+      margin-bottom: 10px;
+    }
+
+    @media (max-width: 600px) {
+      .gallery {
+        grid-template-columns: 1fr;
+      }
+
+      h1 {
+        font-size: 1.8rem;
+      }
+
+      .stats {
+        flex-direction: column;
+        align-items: center;
+      }
+    }
+  </style>
+</head>
+<body>
+  <div class="container">
+    <header>
+      <h1>DarkWood Theme</h1>
+      <p class="subtitle">Screenshot Gallery</p>
+    </header>
+
+    <div class="controls">
+      <button class="btn btn-primary" onclick="document.getElementById('fileInput').click()">
+        📁 Load Screenshots
+      </button>
+      <button class="btn btn-secondary" onclick="loadFromFolder()">
+        🔄 Refresh
+      </button>
+      <input type="file" id="fileInput" multiple accept="image/*" style="display: none" onchange="handleFiles(this.files)">
+    </div>
+
+    <div class="drop-zone" id="dropZone">
+      <p>Drag and drop screenshots here</p>
+      <p style="font-size: 0.9rem;">or click "Load Screenshots" above</p>
+    </div>
+
+    <div class="stats" id="stats" style="display: none;">
+      <div class="stat">
+        <div class="stat-value" id="totalCount">0</div>
+        <div class="stat-label">Screenshots</div>
+      </div>
+      <div class="stat">
+        <div class="stat-value" id="langCount">0</div>
+        <div class="stat-label">Languages</div>
+      </div>
+    </div>
+
+    <div class="gallery" id="gallery"></div>
+
+    <div class="empty-state" id="emptyState">
+      <h2>No screenshots yet</h2>
+      <p>Run the test suite to generate screenshots:</p>
+      <code>npm test</code>
+    </div>
+  </div>
+
+  <!-- Lightbox -->
+  <div class="lightbox" id="lightbox">
+    <span class="lightbox-close" onclick="closeLightbox()">&times;</span>
+    <span class="lightbox-nav lightbox-prev" onclick="navigateLightbox(-1)">&#10094;</span>
+    <img id="lightboxImg" src="" alt="Screenshot">
+    <span class="lightbox-nav lightbox-next" onclick="navigateLightbox(1)">&#10095;</span>
+  </div>
+
+  <script>
+    let screenshots = [];
+    let currentIndex = 0;
+
+    const langMap = {
+      'js': { name: 'JavaScript', class: 'lang-js' },
+      'py': { name: 'Python', class: 'lang-py' },
+      'rs': { name: 'Rust', class: 'lang-rs' },
+      'json': { name: 'JSON', class: 'lang-json' },
+      'html': { name: 'HTML', class: 'lang-html' },
+      'css': { name: 'CSS', class: 'lang-css' },
+    };
+
+    function detectLanguage(filename) {
+      const lower = filename.toLowerCase();
+      for (const [ext, info] of Object.entries(langMap)) {
+        if (lower.includes(`_${ext}`) || lower.includes(`sample_${ext}`) || lower.includes(`.${ext}`)) {
+          return info;
+        }
+      }
+      return { name: 'Unknown', class: '' };
+    }
+
+    function renderGallery() {
+      const gallery = document.getElementById('gallery');
+      const emptyState = document.getElementById('emptyState');
+      const stats = document.getElementById('stats');
+      const dropZone = document.getElementById('dropZone');
+
+      if (screenshots.length === 0) {
+        gallery.innerHTML = '';
+        emptyState.style.display = 'block';
+        stats.style.display = 'none';
+        dropZone.style.display = 'block';
+        return;
+      }
+
+      emptyState.style.display = 'none';
+      stats.style.display = 'flex';
+      dropZone.style.display = 'none';
+
+      // Update stats
+      document.getElementById('totalCount').textContent = screenshots.length;
+      const langs = new Set(screenshots.map(s => detectLanguage(s.name).name));
+      document.getElementById('langCount').textContent = langs.size;
+
+      // Render cards
+      gallery.innerHTML = screenshots.map((screenshot, index) => {
+        const lang = detectLanguage(screenshot.name);
+        return `
+          <div class="screenshot-card">
+            <img
+              class="screenshot-img"
+              src="${screenshot.url}"
+              alt="${screenshot.name}"
+              onclick="openLightbox(${index})"
+            >
+            <div class="screenshot-info">
+              <span class="screenshot-name">${screenshot.name}</span>
+              <span class="screenshot-lang ${lang.class}">${lang.name}</span>
+            </div>
+          </div>
+        `;
+      }).join('');
+    }
+
+    function handleFiles(files) {
+      for (const file of files) {
+        if (file.type.startsWith('image/')) {
+          const url = URL.createObjectURL(file);
+          screenshots.push({ name: file.name, url });
+        }
+      }
+      renderGallery();
+    }
+
+    // Try to load existing PNG files from the directory
+    async function loadFromFolder() {
+      // This works when served from a local server
+      // For file:// protocol, user needs to drag & drop
+      try {
+        const response = await fetch('./');
+        const text = await response.text();
+        const parser = new DOMParser();
+        const doc = parser.parseFromString(text, 'text/html');
+        const links = doc.querySelectorAll('a');
+
+        screenshots = [];
+        for (const link of links) {
+          const href = link.getAttribute('href');
+          if (href && href.endsWith('.png')) {
+            screenshots.push({ name: href, url: href });
+          }
+        }
+        renderGallery();
+      } catch (e) {
+        console.log('Could not auto-load files. Please drag and drop or use the file picker.');
+      }
+    }
+
+    // Lightbox functions
+    function openLightbox(index) {
+      currentIndex = index;
+      const lightbox = document.getElementById('lightbox');
+      const img = document.getElementById('lightboxImg');
+      img.src = screenshots[index].url;
+      lightbox.classList.add('active');
+    }
+
+    function closeLightbox() {
+      document.getElementById('lightbox').classList.remove('active');
+    }
+
+    function navigateLightbox(direction) {
+      currentIndex = (currentIndex + direction + screenshots.length) % screenshots.length;
+      document.getElementById('lightboxImg').src = screenshots[currentIndex].url;
+    }
+
+    // Keyboard navigation
+    document.addEventListener('keydown', (e) => {
+      const lightbox = document.getElementById('lightbox');
+      if (!lightbox.classList.contains('active')) return;
+
+      if (e.key === 'Escape') closeLightbox();
+      if (e.key === 'ArrowLeft') navigateLightbox(-1);
+      if (e.key === 'ArrowRight') navigateLightbox(1);
+    });
+
+    // Drag and drop
+    const dropZone = document.getElementById('dropZone');
+
+    dropZone.addEventListener('dragover', (e) => {
+      e.preventDefault();
+      dropZone.classList.add('dragover');
+    });
+
+    dropZone.addEventListener('dragleave', () => {
+      dropZone.classList.remove('dragover');
+    });
+
+    dropZone.addEventListener('drop', (e) => {
+      e.preventDefault();
+      dropZone.classList.remove('dragover');
+      handleFiles(e.dataTransfer.files);
+    });
+
+    // Initial load attempt
+    loadFromFolder();
+  </script>
+</body>
+</html>

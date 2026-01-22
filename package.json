@@ -3,6 +3,7 @@
   "displayName": "darkwood-vscode-theme",
   "description": "",
   "version": "0.0.1",
+  "packageManager": "bun@1.1.42",
   "engines": {
     "vscode": "^1.51.0"
   },
@@ -17,5 +18,13 @@
         "path": "./themes/darkwood-color-theme.json"
       }
     ]
+  },
+  "scripts": {
+    "test": "node ./test/runTests.js",
+    "screenshots": "open ./test/screenshots/index.html || xdg-open ./test/screenshots/index.html || start ./test/screenshots/index.html"
+  },
+  "devDependencies": {
+    "@vscode/test-electron": "^2.3.8",
+    "screenshot-desktop": "^1.15.0"
   }
 }

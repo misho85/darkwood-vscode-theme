@@ -1,2 +1,5 @@
-node_modules
+node_modules/
 *.vsix
+.vscode-test/
+test/screenshots/*.png
+test/screenshots/*.json
