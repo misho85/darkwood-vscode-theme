@@ -53,7 +53,7 @@
     "editor.inactiveSelectionBackground": "#f7f1ff0c",
     "editor.lineHighlightBackground": "#f7f1ff0c",
     "editor.lineHighlightBorder": "#00000000",
-    "editor.rangeHighlightBackground": "#363537",
+    "editor.rangeHighlightBackground": "#36353780",
     "editor.rangeHighlightBorder": "#363537",
     "editor.selectionBackground": "#bab6c026",
     "editor.selectionHighlightBackground": "#f7f1ff26",
@@ -84,7 +84,7 @@
     "editorHint.foreground": "#948ae3",
     "editorHoverWidget.background": "#363537",
     "editorHoverWidget.border": "#222222",
-    "editorIndentGuide.background": "#363537",
+    "editorIndentGuide.background1": "#363537",
     "editorInfo.border": "#222222",
     "editorInfo.foreground": "#5ad4e6",
     "editorLightBulb.foreground": "#fce566",
@@ -338,8 +338,6 @@
     "titleBar.inactiveBackground": "#191919",
     "titleBar.inactiveForeground": "#525053",
     "walkThrough.embeddedEditorBackground": "#191919",
-    "welcomePage.buttonBackground": "#363537",
-    "welcomePage.buttonHoverBackground": "#525053",
     "widget.shadow": "#131313"
     //"activityBar.activeBorder": "#bab6c0",
     //"activityBar.dropBorder": "#bab6c0",
@@ -1189,61 +1187,45 @@
       }
     },
     {
-      "scope": [
-        "meta.paragraph.markdown meta.dummy.line-break",
-        "meta.paragraph.markdown meta.hard-line-break.markdown"
-      ],
-      "settings": {
-        "background": "#948AE3"
-      }
-    },
-    {
       "scope": "region.redish",
       "settings": {
-        "foreground": "#FC618D",
-        "background": "#FC618D59"
+        "foreground": "#FC618D"
       }
     },
     {
       "scope": "region.orangish",
       "settings": {
-        "foreground": "#FD9353",
-        "background": "#FD935359"
+        "foreground": "#FD9353"
       }
     },
     {
       "scope": "region.yellowish",
       "settings": {
-        "foreground": "#FCE566",
-        "background": "#FCE56659"
+        "foreground": "#FCE566"
       }
     },
     {
       "scope": "region.greenish",
       "settings": {
-        "foreground": "#7BD88F",
-        "background": "#7BD88F59"
+        "foreground": "#7BD88F"
       }
     },
     {
       "scope": "region.bluish",
       "settings": {
-        "foreground": "#5AD4E6",
-        "background": "#5AD4E659"
+        "foreground": "#5AD4E6"
       }
     },
     {
       "scope": "region.purplish",
       "settings": {
-        "foreground": "#948AE3",
-        "background": "#948AE359"
+        "foreground": "#948AE3"
       }
     },
     {
       "scope": "region.pinkish",
       "settings": {
-        "foreground": "#FC618D",
-        "background": "#FC618D59"
+        "foreground": "#FC618D"
       }
     },
     {
@@ -1341,14 +1323,14 @@
       "scope": "storage.type.extends",
       "settings": {
         "foreground": "#FC618D",
-        "fontStyle": "normal"
+        "fontStyle": ""
       }
     },
     {
       "scope": "storage.type.function.arrow",
       "settings": {
         "foreground": "#FC618D",
-        "fontStyle": "normal"
+        "fontStyle": ""
       }
     },
     {
@@ -1511,7 +1493,7 @@
       "scope": "support.type.property-name",
       "settings": {
         "foreground": "#F7F1FF",
-        "fontStyle": "normal"
+        "fontStyle": ""
       }
     },
     {
